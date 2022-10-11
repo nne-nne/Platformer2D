@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerControllerLevel1 : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class PlayerControllerLevel1 : MonoBehaviour
     private Rigidbody2D rigidBody;
     private bool isFacingRight = true;
     private Animator animator;
+
+    private int score = 0;
 
     public void Jump()
     {
@@ -86,4 +89,20 @@ public class PlayerControllerLevel1 : MonoBehaviour
         Gizmos.DrawLine(groundedExtent, groundedExtent + Vector3.left * groundedSideTolerance);
         Gizmos.DrawLine(groundedExtent, groundedExtent - Vector3.left * groundedSideTolerance);
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Coin"))
+        {
+            score += 1;
+            Debug.Log($"score: {score}");
+            other.gameObject.SetActive(false);
+        }
+        else if (other.CompareTag("Finish"))
+        {
+            Debug.Log($"finish");
+            SceneManager.LoadScene(1);
+        }
+    }
+
 }
