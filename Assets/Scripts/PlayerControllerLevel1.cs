@@ -10,6 +10,7 @@ public class PlayerControllerLevel1 : MonoBehaviour
     [SerializeField] float jumpForce = 6f;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] float moveSpeed = 0.1f;
+    [SerializeField] float dump = 0.6f;
 
     private Rigidbody2D rigidBody;
     private bool isFacingRight = true;
@@ -26,6 +27,24 @@ public class PlayerControllerLevel1 : MonoBehaviour
         rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
+    private void MoveRight()
+    {
+        if (rigidBody.velocity.x < moveSpeed)
+        {
+            rigidBody.velocity = new Vector2(moveSpeed, rigidBody.velocity.y);
+            rigidBody.AddForce(Vector2.right * dump, ForceMode2D.Impulse);
+        }
+    }
+
+    private void MoveLeft()
+    {
+        if (rigidBody.velocity.x > -moveSpeed)
+        {
+            rigidBody.velocity = new Vector2(-moveSpeed, rigidBody.velocity.y);
+            rigidBody.AddForce(Vector2.left * 0.6f, ForceMode2D.Impulse);
+        }
+    }
+
     private bool IsGrounded()
     {
         Vector2 raycastTop = transform.position;
@@ -40,7 +59,6 @@ public class PlayerControllerLevel1 : MonoBehaviour
         {
             return true;
         }
-        Debug.Log("Air-borne");
         return false;
     }
 
@@ -60,13 +78,21 @@ public class PlayerControllerLevel1 : MonoBehaviour
 
     void Update()
     {
-        float hor = Input.GetAxisRaw("Horizontal");
+        float hor = Input.GetAxis("Horizontal");
         if (hor != 0)
         {
             animator.SetBool("isWalking", true);
             if (hor > 0 && !isFacingRight || hor < 0 && isFacingRight)
             {
                 Flip();
+            }
+            if(hor > 0)
+            {
+                MoveRight();
+            }
+            if (hor < 0)
+            {
+                MoveLeft();
             }
         }
         else animator.SetBool("isWalking", false);
