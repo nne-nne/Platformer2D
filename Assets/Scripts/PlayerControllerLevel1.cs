@@ -11,6 +11,7 @@ public class PlayerControllerLevel1 : MonoBehaviour
     [SerializeField] float moveSpeed = 0.1f;
 
     private Rigidbody2D rigidBody;
+    private bool isFacingRight = true;
 
     public void Jump()
     {
@@ -44,8 +45,24 @@ public class PlayerControllerLevel1 : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
     }
 
+    void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+    }
+
     void Update()
     {
+        float hor = Input.GetAxisRaw("Horizontal");
+        if (hor != 0)
+        {
+            if(hor>0&&!isFacingRight || hor < 0 && isFacingRight)
+            {
+                Flip();
+            }
+        }
         transform.Translate(Vector3.right * Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime);
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
