@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,12 +21,19 @@ public class PlayerCollision : MonoBehaviour
             return;
 
         currentHealth -= 1;
-        transform.position = startPosition;
+        StartCoroutine(ResetPositionAfterFrame());
 
         if(currentHealth == 0)
         {
             Die();
         }
+    }
+
+    private IEnumerator ResetPositionAfterFrame()
+    {
+        yield return null;
+
+        transform.position = startPosition;
     }
 
     private void Die()
@@ -42,12 +49,20 @@ public class PlayerCollision : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        IMortalCreature mortal = collision.otherCollider.GetComponent<IMortalCreature>();
+        if (collision.gameObject.tag != "Enemy")
+            return;
+
+        IMortalCreature mortal = collision.collider.GetComponent<IMortalCreature>();
+        if(mortal == null)
+        {
+            Debug.Log("Immortal");
+        }
         if (mortal != null && !mortal.IsAlive())
             return;  // dead enemy
 
-        bool isPlayerAbove = (transform.position - collision.transform.position).y > playerAboveThreshold;
-        if(collision.gameObject.tag == "Enemy" && !isPlayerAbove)
+        Debug.Log($"From player. Enemy {collision.collider.transform.position}. Player {transform.position}");
+        bool isPlayerAbove = (transform.position - collision.collider.transform.position).y > playerAboveThreshold;
+        if(!isPlayerAbove)
         {
             LoseHealth();
         }

@@ -40,9 +40,12 @@ public class EnemyCollision : MonoBehaviour, IMortalCreature
         if (isDead)
             return;
 
-        bool isPlayerAbove = (collision.transform.position - transform.position).y > PlayerCollision.playerAboveThreshold;
+        if (collision.gameObject.tag != "Player")
+            return;
 
-        if (collision.gameObject.tag == "Player" && isPlayerAbove)
+        bool isPlayerAbove = (collision.collider.transform.position - transform.position).y > PlayerCollision.playerAboveThreshold;
+
+        if (isPlayerAbove)
         {
             Die();
         }
