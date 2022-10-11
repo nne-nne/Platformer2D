@@ -7,14 +7,33 @@ public class PlayerControllerLevel1 : MonoBehaviour
     public float moveSpeed = 0.1f;
     public float jumpForce = 6f;
     private Rigidbody2D rigidBody;
+    private bool isFacingRight = true;
 
     void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
     }
 
+    void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+    }
+
     void Update()
     {
+        float hor = Input.GetAxisRaw("Horizontal");
+        if (hor != 0)
+        {
+            if(hor>0&&!isFacingRight || hor < 0 && isFacingRight)
+            {
+                Flip();
+            }
+        }
+
+
         //if (Input.GetKey(KeyCode.RightArrow))
         //{
         //    transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
