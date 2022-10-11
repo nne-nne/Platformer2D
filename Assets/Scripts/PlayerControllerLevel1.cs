@@ -70,7 +70,6 @@ public class PlayerControllerLevel1 : MonoBehaviour
             }
         }
         else animator.SetBool("isWalking", false);
-        transform.Translate(Vector3.right * Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime);
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
