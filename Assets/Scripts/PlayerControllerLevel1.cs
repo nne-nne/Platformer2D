@@ -42,7 +42,6 @@ public class PlayerControllerLevel1 : MonoBehaviour
         {
             return true;
         }
-        Debug.Log("Air-borne");
         return false;
     }
 
@@ -118,6 +117,11 @@ public class PlayerControllerLevel1 : MonoBehaviour
         {
             keyNumber += 1;
             Debug.Log($"keys: {keyNumber}");
+            other.gameObject.SetActive(false);
+        }
+        else if (other.CompareTag("ExtraLive"))
+        {
+            Debug.Log($"You have an extra live now, good luck wasting both");
             other.gameObject.SetActive(false);
         }
     }
