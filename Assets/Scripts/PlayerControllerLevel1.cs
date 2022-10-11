@@ -63,7 +63,7 @@ public class PlayerControllerLevel1 : MonoBehaviour
                 Flip();
             }
         }
-        transform.Translate(Vector3.right * Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime);
+        transform.Translate(Vector3.right * hor * moveSpeed * Time.deltaTime);
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             Jump();

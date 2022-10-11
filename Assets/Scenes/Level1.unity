@@ -751,7 +751,6 @@ MonoBehaviour:
   ySmooth: 8
   maxXAndY: {x: 100, y: 5.5}
   minXAndY: {x: -9.5, y: -5.5}
-  m_Player: {fileID: 0}
 --- !u!1001 &953540988
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1877,9 +1876,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6084951852646480108, guid: 959918a43d62e824686daea3ea5b4624, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6084951852646480108, guid: 959918a43d62e824686daea3ea5b4624, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6084951852646480108, guid: 959918a43d62e824686daea3ea5b4624, type: 3}
+      propertyPath: m_GravityScale
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6084951852646480109, guid: 959918a43d62e824686daea3ea5b4624, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6751839811428906944, guid: 959918a43d62e824686daea3ea5b4624, type: 3}
+      propertyPath: xMax
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 6751839811428906944, guid: 959918a43d62e824686daea3ea5b4624, type: 3}
+      propertyPath: xMin
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6751839811428906944, guid: 959918a43d62e824686daea3ea5b4624, type: 3}
+      propertyPath: moveSpeed
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 959918a43d62e824686daea3ea5b4624, type: 3}
