@@ -12,6 +12,7 @@ public class PlayerControllerLevel1 : MonoBehaviour
 
     private Rigidbody2D rigidBody;
     private bool isFacingRight = true;
+    private Animator animator;
 
     public void Jump()
     {
@@ -43,6 +44,7 @@ public class PlayerControllerLevel1 : MonoBehaviour
     void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     void Flip()
@@ -58,16 +60,19 @@ public class PlayerControllerLevel1 : MonoBehaviour
         float hor = Input.GetAxisRaw("Horizontal");
         if (hor != 0)
         {
-            if(hor>0&&!isFacingRight || hor < 0 && isFacingRight)
+            animator.SetBool("isWalking", true);
+            if (hor > 0 && !isFacingRight || hor < 0 && isFacingRight)
             {
                 Flip();
             }
         }
+        else animator.SetBool("isWalking", false);
         transform.Translate(Vector3.right * Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime);
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
         }
+        animator.SetBool("isGrounded", IsGrounded());
     }
 
     private void OnDrawGizmosSelected()
