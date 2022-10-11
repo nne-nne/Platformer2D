@@ -23,13 +23,13 @@ public class PlayerControllerLevel1 : MonoBehaviour
 
     private bool IsGrounded()
     {
-        //Vector3 raycastTop = transform.position;
-        //Vector3 raycastBottom = raycastTop + Vector3.down * groundedTolerance;
-        //if(Physics.CapsuleCast(raycastTop, raycastBottom, groundedSideTolerance, Vector3.down, groundedTolerance, groundLayer.value))
-        //{
-        //    return true;
-        //}
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundedTolerance, groundLayer.value);
+        Vector2 raycastTop = transform.position;
+        Vector2 raycastBottom = raycastTop + Vector2.down * groundedTolerance;
+
+        Vector2 raycastCenter = (raycastTop + raycastBottom) / 2;
+        Vector2 raycastSize = new Vector2(groundedSideTolerance, (raycastTop - raycastCenter).y);
+
+        RaycastHit2D hit = Physics2D.BoxCast(raycastCenter, raycastSize, 0, Vector2.down, groundedTolerance, groundLayer.value);
 
         if (hit.collider != null)
         {
