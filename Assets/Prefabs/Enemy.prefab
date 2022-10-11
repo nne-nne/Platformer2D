@@ -59,7 +59,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6084951852646480109}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -103,10 +103,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f9e8fe5b45f7343a6d9d41219b06ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xMin: 0
-  xMax: 0
-  moveSpeed: 0
-  animator: {fileID: 0}
+  xMin: 3
+  xMax: 7
+  moveSpeed: 1
+  animator: {fileID: 6362634645652715422}
 --- !u!1001 &5933175608543336749
 PrefabInstance:
   m_ObjectHideFlags: 0

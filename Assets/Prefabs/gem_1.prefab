@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8659796245862684059}
   - component: {fileID: 7452043078409571900}
   - component: {fileID: 7761339230088491198}
-  - component: {fileID: 6394592287297092643}
+  - component: {fileID: 3310362596143196798}
   m_Layer: 0
   m_Name: gem_1
   m_TagString: Untagged
@@ -100,7 +100,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.25
---- !u!114 &6394592287297092643
+--- !u!114 &3310362596143196798
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,7 +109,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2342529667741364140}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b92d386a2149de443a508a8754ce89cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ea40085e1ca0d042897582a27bb453d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amp: 0.3
+  ampHor: 0
+  ampVer: 0.3
+  speedHor: 1
+  speedVer: 1

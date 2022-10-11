@@ -11,6 +11,8 @@ public class PlayerControllerLevel1 : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
     [SerializeField] float moveSpeed = 0.1f;
     [SerializeField] float dump = 0.6f;
+    [SerializeField] int maxKeyNumber = 3;
+    [SerializeField] int keyNumber = 0;
 
     private Rigidbody2D rigidBody;
     private bool isFacingRight = true;
@@ -126,8 +128,27 @@ public class PlayerControllerLevel1 : MonoBehaviour
         }
         else if (other.CompareTag("Finish"))
         {
-            Debug.Log($"finish");
-            SceneManager.LoadScene(1);
+            if (keyNumber >= maxKeyNumber)
+            {
+                Debug.Log($"finish");
+                SceneManager.LoadScene(1);
+            }
+            else
+            {
+                Debug.Log($"go collect more keys");
+            }
+           
+        }
+        else if (other.CompareTag("Key"))
+        {
+            keyNumber += 1;
+            Debug.Log($"keys: {keyNumber}");
+            other.gameObject.SetActive(false);
+        }
+        else if (other.CompareTag("ExtraLive"))
+        {
+            Debug.Log($"You have an extra live now, good luck wasting both");
+            other.gameObject.SetActive(false);
         }
     }
 
