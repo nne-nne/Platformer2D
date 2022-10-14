@@ -137,6 +137,7 @@ public class GameManager : MonoBehaviour
         }
 
         timer += Time.deltaTime;
-        timerText.text = string.Format("{0:00}:{1:00}", timer/60, timer%60);
+        int timerSeconds = Mathf.FloorToInt(timer);
+        timerText.text = string.Format("{0:00}:{1:00}", Mathf.FloorToInt(timerSeconds/60), timerSeconds%60);
     }
 }
