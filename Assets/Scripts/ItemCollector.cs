@@ -37,8 +37,7 @@ public class ItemCollector : MonoBehaviour
         }
         else if (other.CompareTag("Key"))
         {
-            keyNumber += 1;
-            Debug.Log($"keys: {keyNumber}");
+            GameManager.instance.AddKey();
             other.gameObject.SetActive(false);
         }
         else if (other.CompareTag("ExtraLive"))
