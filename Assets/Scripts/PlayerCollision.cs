@@ -60,7 +60,6 @@ public class PlayerCollision : MonoBehaviour
         if (mortal != null && !mortal.IsAlive())
             return;  // dead enemy
 
-        Debug.Log($"From player. Enemy {collision.collider.transform.position}. Player {transform.position}");
         bool isPlayerAbove = (transform.position - collision.collider.transform.position).y > playerAboveThreshold;
         if(!isPlayerAbove)
         {
