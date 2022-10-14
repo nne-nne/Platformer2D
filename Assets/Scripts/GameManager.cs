@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public enum GameState
 {
@@ -20,9 +21,14 @@ public class GameManager : MonoBehaviour
     public GameState currentGameState;
     public Image[] keysTab;
     public Image[] livesTab;
+    public Image[] enemiesTab;
+    public TMP_Text timerText;
 
     private int keys = 0;
     private int lives = 3;
+    private int enemies = 2;
+
+    private float timer = 0;
 
     public int Keys { get => keys; }
     public int Lives { get => lives; }
@@ -43,6 +49,12 @@ public class GameManager : MonoBehaviour
     {
         lives--;
         livesTab[lives].enabled = false;
+    }
+
+    public void KillEnemy()
+    {
+        enemies--;
+        enemiesTab[enemies].enabled = false;
     }
 
     private void SetGameState(GameState newGameState)
@@ -123,5 +135,8 @@ public class GameManager : MonoBehaviour
                 InGame();
             }
         }
+
+        timer += Time.deltaTime;
+        timerText.text = string.Format("{0:00}:{1:00}", timer/60, timer%60);
     }
 }

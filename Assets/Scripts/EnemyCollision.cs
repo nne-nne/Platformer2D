@@ -22,7 +22,7 @@ public class EnemyCollision : MonoBehaviour, IMortalCreature
     {
         isDead = true;
         GetComponent<EnemyController>().enabled = false;
-
+        GameManager.instance.KillEnemy();
 
         animator.SetBool("isDead", true);
         StartCoroutine(KillOnAnimationEnd());
