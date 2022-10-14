@@ -12,8 +12,7 @@ public class PlayerControllerLevel1 : MonoBehaviour
     [SerializeField] float moveSpeed = 0.1f;
     [SerializeField] float dump = 0.6f;
     [SerializeField] int maxKeyNumber = 3;
-    [SerializeField] int keyNumber = 0;
-
+    
     private Rigidbody2D rigidBody;
     private bool isFacingRight = true;
     private Animator animator;
@@ -130,7 +129,7 @@ public class PlayerControllerLevel1 : MonoBehaviour
         }
         else if (other.CompareTag("Finish"))
         {
-            if (keyNumber >= maxKeyNumber)
+            if (GameManager.instance.Keys >= maxKeyNumber)
             {
                 Debug.Log($"finish");
                 SceneManager.LoadScene(1);
@@ -143,8 +142,7 @@ public class PlayerControllerLevel1 : MonoBehaviour
         }
         else if (other.CompareTag("Key"))
         {
-            keyNumber += 1;
-            Debug.Log($"keys: {keyNumber}");
+            GameManager.instance.AddKey();
             other.gameObject.SetActive(false);
         }
         else if (other.CompareTag("ExtraLive"))
