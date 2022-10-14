@@ -11,7 +11,7 @@ public class PlayerControllerLevel1 : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
     [SerializeField] float moveSpeed = 0.1f;
     [SerializeField] float dump = 0.6f;
-
+	
     private Rigidbody2D rigidBody;
     private bool isFacingRight = true;
     private Animator animator;
@@ -115,5 +115,4 @@ public class PlayerControllerLevel1 : MonoBehaviour
         Gizmos.DrawLine(groundedExtent, groundedExtent + Vector3.left * groundedSideTolerance);
         Gizmos.DrawLine(groundedExtent, groundedExtent - Vector3.left * groundedSideTolerance);
     }
-
 }

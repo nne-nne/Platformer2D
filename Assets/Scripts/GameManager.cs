@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 public enum GameState
 {
     GS_PAUSE_MENU,
@@ -16,6 +18,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] Canvas inGameCanvas;
 
     public GameState currentGameState;
+    public Image[] keysTab;
+
+    private int keys = 0;
+
+    public int Keys { get => keys; }
+
+    public void AddKey()
+    {
+        keysTab[keys].color = Color.yellow;
+        keys++;
+
+    }
 
     private void SetGameState(GameState newGameState)
     {
@@ -58,6 +72,11 @@ public class GameManager : MonoBehaviour
         if(instance == null)
         {
             instance = this;
+        }
+
+        foreach(Image keyImg in keysTab)
+        {
+            keyImg.color = Color.grey;
         }
     }
 
