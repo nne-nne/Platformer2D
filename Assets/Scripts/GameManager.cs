@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    [SerializeField] Canvas inGameCanvas;
+
     public GameState currentGameState;
     public Image[] keysTab;
 
@@ -33,6 +35,15 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("New game state: " + newGameState);
         currentGameState = newGameState;
+
+        if(newGameState == GameState.GS_GAME)
+        {
+            inGameCanvas.enabled = true;
+        }
+        else
+        {
+            inGameCanvas.enabled = false;
+        }
     }
 
     private void InGame()
