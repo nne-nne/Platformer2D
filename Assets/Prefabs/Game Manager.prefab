@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3926487979688629691}
   - component: {fileID: 3926487979688629690}
+  - component: {fileID: 6307686941313486502}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -43,4 +44,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ccf32f2e8c193c49a4ff11bb37f6572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inGameCanvas: {fileID: 0}
   currentGameState: 0
+  keysTab: []
+--- !u!114 &6307686941313486502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3926487979688629689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75fb983e5d7a3154a98254685b3a40cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinsText: {fileID: 0}

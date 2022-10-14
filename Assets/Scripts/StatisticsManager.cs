@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class StatisticsManager : MonoBehaviour
 {
-    [SerializeField] Text coinsText;
+    [SerializeField] TMP_Text coinsText;
 
     private int coins = 0;
 
