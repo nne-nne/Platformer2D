@@ -11,7 +11,12 @@ public class PlayerControllerLevel1 : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
     [SerializeField] float moveSpeed = 0.1f;
     [SerializeField] float dump = 0.6f;
-	
+<<<<<<< HEAD
+
+=======
+    [SerializeField] int maxKeyNumber = 3;
+    
+>>>>>>> master
     private Rigidbody2D rigidBody;
     private bool isFacingRight = true;
     private Animator animator;

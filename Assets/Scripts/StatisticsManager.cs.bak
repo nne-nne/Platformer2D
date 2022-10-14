@@ -9,9 +9,13 @@ using TMPro;
 
 public class StatisticsManager : MonoBehaviour
 {
+<<<<<<< HEAD
     public static StatisticsManager Instance { get; private set; }
 
+    [SerializeField] Text coinsText;
+=======
     [SerializeField] TMP_Text coinsText;
+>>>>>>> master
 
     private int coins = 0;
 
