@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 public enum GameState
 {
     GS_PAUSE_MENU,
@@ -14,6 +16,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public GameState currentGameState;
+    public Image[] keysTab;
 
     private void SetGameState(GameState newGameState)
     {
