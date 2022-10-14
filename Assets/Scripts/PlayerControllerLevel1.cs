@@ -79,6 +79,9 @@ public class PlayerControllerLevel1 : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.instance.currentGameState != GameState.GS_GAME)
+            return;
+
         float hor = Input.GetAxis("Horizontal");
         if (hor != 0)
         {
