@@ -43,6 +43,7 @@ public class ItemCollector : MonoBehaviour
         else if (other.CompareTag("ExtraLive"))
         {
             Debug.Log($"You have an extra live now, good luck wasting both");
+            GameManager.instance.AddLive();
             other.gameObject.SetActive(false);
         }
     }

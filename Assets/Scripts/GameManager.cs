@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
         SetGameState(GameState.GS_GAME);
     } 
 
-    private void GameOver()
+    public void GameOver()
     {
         SetGameState(GameState.GS_GAME_OVER);
     }
@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
         SetGameState(GameState.GS_PAUSE_MENU);
     }
 
-    private void LevelCompleted()
+    public void LevelCompleted()
     {
         SetGameState(GameState.GS_LEVEL_COMPLETED);
     }
@@ -128,15 +128,24 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(currentGameState == GameState.GS_PAUSE_MENU)
+        if (Input.GetKeyDown(KeyCode.S))
         {
-            if (Input.GetKeyDown(KeyCode.S))
+            if (currentGameState == GameState.GS_PAUSE_MENU)
             {
                 InGame();
             }
+            else
+            {
+                PauseMenu();
+            }
         }
 
+        Time.timeScale = currentGameState == GameState.GS_GAME ? 1f : 0;
+
+
         timer += Time.deltaTime;
-        timerText.text = string.Format("{0:00}:{1:00}", timer/60, timer%60);
+        timerText.text = string.Format("{0:00}:{1:00}", timer / 60, timer % 60);
+
+
     }
 }
