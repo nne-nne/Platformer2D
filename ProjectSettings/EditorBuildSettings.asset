@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/ArtsPlayground.unity
     guid: 329a80393089aeb4794e65d785e96133
   - enabled: 1
-    path: Assets/Scenes/Level1Extended.unity
+    path: Assets/Scenes/GameManager.unity
     guid: 66bd6582b049ae24dbff48544411697f
   m_configObjects: {}
