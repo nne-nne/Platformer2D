@@ -19,6 +19,7 @@ public class PlayerCollision : MonoBehaviour
     {
         if (currentHealth <= 0)
             return;
+        GameManager.instance.LoseLive();
 
         currentHealth -= 1;
         StartCoroutine(ResetPositionAfterFrame());

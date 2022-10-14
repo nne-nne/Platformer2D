@@ -19,16 +19,30 @@ public class GameManager : MonoBehaviour
 
     public GameState currentGameState;
     public Image[] keysTab;
+    public Image[] livesTab;
 
     private int keys = 0;
+    private int lives = 3;
 
     public int Keys { get => keys; }
+    public int Lives { get => lives; }
 
     public void AddKey()
     {
         keysTab[keys].color = Color.yellow;
         keys++;
+    }
 
+    public void AddLive()
+    {
+        livesTab[lives].enabled = true;
+        lives++;
+    }
+
+    public void LoseLive()
+    {
+        lives--;
+        livesTab[lives].enabled = false;
     }
 
     private void SetGameState(GameState newGameState)
@@ -69,14 +83,19 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
 
-        foreach(Image keyImg in keysTab)
+        foreach (Image keyImg in keysTab)
         {
             keyImg.color = Color.grey;
+        }
+
+        for (int i = 0; i < livesTab.Length; i++)
+        {
+            livesTab[i].enabled = lives > i;
         }
     }
 
