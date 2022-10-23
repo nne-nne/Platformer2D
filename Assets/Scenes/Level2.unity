@@ -10337,6 +10337,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1684459060}
+    - target: {fileID: 81043887618149152, guid: e91ca73c75d7f9847acac6e0d82343a9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: onLevel2ButtonPressed
+      objectReference: {fileID: 0}
     - target: {fileID: 886278027446746616, guid: e91ca73c75d7f9847acac6e0d82343a9, type: 3}
       propertyPath: m_Color.b
       value: 0.8207547
@@ -10631,6 +10635,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1684459060}
+    - target: {fileID: 8236649559634911760, guid: e91ca73c75d7f9847acac6e0d82343a9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: onLevel2ButtonPressed
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e91ca73c75d7f9847acac6e0d82343a9, type: 3}
 --- !u!114 &4325092660772905340 stripped
