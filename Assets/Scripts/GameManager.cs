@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         enemiesTab[enemies].enabled = false;
     }
 
-    private void SetGameState(GameState newGameState)
+    public void SetGameState(GameState newGameState)
     {
         Debug.Log("New game state: " + newGameState);
         currentGameState = newGameState;
