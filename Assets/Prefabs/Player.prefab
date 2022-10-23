@@ -116,6 +116,8 @@ GameObject:
   - component: {fileID: 7417082916022929892}
   - component: {fileID: 1577212219978205865}
   - component: {fileID: 4167390816403108213}
+  - component: {fileID: 8544967592721420930}
+  - component: {fileID: 6040284565852654653}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -223,6 +225,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxKeyNumber: 3
   keyNumber: 0
+--- !u!114 &8544967592721420930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640864180335160959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b229a647ff205144ea80236645336ca7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallLevelTag: FallLevel
+--- !u!114 &6040284565852654653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640864180335160959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 583914b77d30dce4b9d34feaa4666688, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingPlatformTag: MovingPlatform
 --- !u!1001 &8101817455212090538
 PrefabInstance:
   m_ObjectHideFlags: 0
