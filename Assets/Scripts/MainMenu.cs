@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     public IEnumerator StartGame(string levelName)
     {
+        Time.timeScale = 1;
         yield return new WaitForSeconds(.1f);
         SceneManager.LoadScene(levelName);
     }

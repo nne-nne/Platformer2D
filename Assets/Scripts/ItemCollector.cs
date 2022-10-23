@@ -8,14 +8,10 @@ using UnityEngine.SceneManagement;
 
 public class ItemCollector : MonoBehaviour
 {
-    [SerializeField] int maxKeyNumber = 3;
-    [SerializeField] int keyNumber = 0;
-
     private void OnTouchFinish()
     {
-        if (GameManager.instance.Keys >= maxKeyNumber)
+        if (GameManager.instance.KeysCompleted)
         {
-            Debug.Log($"finish");
             GameManager.instance.SetGameState(GameState.GS_LEVEL_COMPLETED);
         }
         else

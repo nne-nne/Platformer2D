@@ -20,7 +20,7 @@ public class FlameShake : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float noiseVal = Mathf.PerlinNoise(Time.time * speed, Time.time * speed);
+        float noiseVal = 1 - Mathf.PerlinNoise(Time.time * speed, Time.time * speed);
         noiseVal = Mathf.Pow(noiseVal, exp);
         noiseVal = Mathf.Lerp(minIntensity, maxIntensity, noiseVal);
         rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, noiseVal);

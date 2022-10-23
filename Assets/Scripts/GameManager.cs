@@ -17,26 +17,42 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [SerializeField] Canvas inGameCanvas;
+    [SerializeField] Canvas levelCompletedCanvas;
+    [SerializeField] Canvas gameOverCanvas;
 
     public GameState currentGameState;
     public Image[] keysTab;
     public Image[] livesTab;
     public Image[] enemiesTab;
     public TMP_Text timerText;
+    public TMP_Text gameOverScoreText;
+    public TMP_Text levelCompletedScoreText;
 
     private int keys = 0;
     private int lives = 3;
+    private int maxLives = 4;
     private int enemies = 2;
+    private int maxEnemies = 2;
+    private bool keysCompleted = false;
+
+    [SerializeField] int maxKeyNumber = 3;
+    
 
     private float timer = 0;
 
     public int Keys { get => keys; }
     public int Lives { get => lives; }
+    public int MaxKeyNumber { get => maxKeyNumber; }
+    public bool KeysCompleted { get => keysCompleted; }
 
     public void AddKey()
     {
         keysTab[keys].color = Color.yellow;
         keys++;
+        if(keys >= maxKeyNumber)
+        {
+            keysCompleted = true;
+        }
     }
 
     public void AddLive()
@@ -70,6 +86,42 @@ public class GameManager : MonoBehaviour
         {
             inGameCanvas.enabled = false;
         }
+
+        if (newGameState == GameState.GS_LEVEL_COMPLETED)
+        {
+            SetScoreText(levelCompletedScoreText);
+            levelCompletedCanvas.enabled = true;
+        }
+        else
+        {
+            levelCompletedCanvas.enabled = false;
+        }
+
+        if (newGameState == GameState.GS_GAME_OVER)
+        {
+            SetScoreText(gameOverScoreText);
+            gameOverCanvas.enabled = true;
+        }
+        else
+        {
+            gameOverCanvas.enabled = false;
+        }
+
+        Time.timeScale = currentGameState == GameState.GS_GAME ? 1f : 0;
+    }
+
+    private double CountScore()
+    {
+        double timeBonus = 60.0 - timer;
+        if (timeBonus < 0) timeBonus = 0;
+        return timeBonus + (maxEnemies - enemies) * 20.0 + (maxLives -  lives )*10.0;
+    }
+
+    private void SetScoreText(TMP_Text textField)
+    {
+        double score = CountScore();
+        string scoreTextValue = $"Score: {score.ToString("F1")}";
+        textField.text = scoreTextValue;
     }
 
     private void InGame()
@@ -139,8 +191,6 @@ public class GameManager : MonoBehaviour
                 PauseMenu();
             }
         }
-
-        Time.timeScale = currentGameState == GameState.GS_GAME ? 1f : 0;
 
 
         timer += Time.deltaTime;
