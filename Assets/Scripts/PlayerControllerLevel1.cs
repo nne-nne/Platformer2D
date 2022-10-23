@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,11 +12,20 @@ public class PlayerControllerLevel1 : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
     [SerializeField] float moveSpeed = 0.1f;
     [SerializeField] float dump = 0.6f;
-	
+
+    public event Action onJumpInput;
+
+    public float MoveSpeed
+    {
+        get => moveSpeed;
+        set => moveSpeed = value;
+    }
+
+    public bool ImpulseMovingEnabled { get; set; } = true;
+
     private Rigidbody2D rigidBody;
     private bool isFacingRight = true;
     private Animator animator;
-
     public void Jump()
     {
         if (!IsGrounded())
@@ -29,7 +39,7 @@ public class PlayerControllerLevel1 : MonoBehaviour
         if (rigidBody.velocity.x < moveSpeed)
         {
             rigidBody.velocity = new Vector2(moveSpeed, rigidBody.velocity.y);
-            rigidBody.AddForce(Vector2.right * dump, ForceMode2D.Impulse);
+            //rigidBody.AddForce(Vector2.right * dump, ForceMode2D.Force);
         }
     }
 
@@ -38,7 +48,7 @@ public class PlayerControllerLevel1 : MonoBehaviour
         if (rigidBody.velocity.x > -moveSpeed)
         {
             rigidBody.velocity = new Vector2(-moveSpeed, rigidBody.velocity.y);
-            rigidBody.AddForce(Vector2.left * 0.6f, ForceMode2D.Impulse);
+            //rigidBody.AddForce(Vector2.left * dump, ForceMode2D.Force);
         }
     }
 
@@ -98,6 +108,7 @@ public class PlayerControllerLevel1 : MonoBehaviour
         else animator.SetBool("isWalking", false);
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
+            onJumpInput?.Invoke();
             Jump();
         }
         animator.SetBool("isGrounded", IsGrounded());

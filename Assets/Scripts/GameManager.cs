@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Canvas inGameCanvas;
     [SerializeField] Canvas levelCompletedCanvas;
     [SerializeField] Canvas gameOverCanvas;
+    [SerializeField] Canvas pauseMenuCanvas;
 
     public GameState currentGameState;
     public Image[] keysTab;
@@ -72,44 +74,6 @@ public class GameManager : MonoBehaviour
         enemies--;
         enemiesTab[enemies].enabled = false;
     }
-
-    public void SetGameState(GameState newGameState)
-    {
-        Debug.Log("New game state: " + newGameState);
-        currentGameState = newGameState;
-
-        if(newGameState == GameState.GS_GAME)
-        {
-            inGameCanvas.enabled = true;
-        }
-        else
-        {
-            inGameCanvas.enabled = false;
-        }
-
-        if (newGameState == GameState.GS_LEVEL_COMPLETED)
-        {
-            SetScoreText(levelCompletedScoreText);
-            levelCompletedCanvas.enabled = true;
-        }
-        else
-        {
-            levelCompletedCanvas.enabled = false;
-        }
-
-        if (newGameState == GameState.GS_GAME_OVER)
-        {
-            SetScoreText(gameOverScoreText);
-            gameOverCanvas.enabled = true;
-        }
-        else
-        {
-            gameOverCanvas.enabled = false;
-        }
-
-        Time.timeScale = currentGameState == GameState.GS_GAME ? 1f : 0;
-    }
-
     private double CountScore()
     {
         double timeBonus = 60.0 - timer;
@@ -127,23 +91,53 @@ public class GameManager : MonoBehaviour
     private void InGame()
     {
         SetGameState(GameState.GS_GAME);
-    } 
+    }
 
     public void GameOver()
     {
+        SetScoreText(gameOverScoreText);
         SetGameState(GameState.GS_GAME_OVER);
     }
 
-    private void PauseMenu()
+    public void PauseMenu()
     {
         SetGameState(GameState.GS_PAUSE_MENU);
     }
 
     public void LevelCompleted()
     {
+        SetScoreText(levelCompletedScoreText);
         SetGameState(GameState.GS_LEVEL_COMPLETED);
     }
 
+
+    private void SetGameState(GameState newGameState)
+    {
+        Debug.Log("New game state: " + newGameState);
+        currentGameState = newGameState;
+
+        inGameCanvas.enabled = (currentGameState == GameState.GS_GAME);
+        pauseMenuCanvas.enabled = (currentGameState == GameState.GS_PAUSE_MENU);
+        gameOverCanvas.enabled = (currentGameState == GameState.GS_GAME_OVER);
+        levelCompletedCanvas.enabled = (currentGameState == GameState.GS_LEVEL_COMPLETED);
+
+        Time.timeScale = currentGameState == GameState.GS_GAME ? 1f : 0;
+    }
+
+    private void ProcessInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (currentGameState == GameState.GS_GAME)
+            {
+                PauseMenu();
+            }
+            else if (currentGameState == GameState.GS_PAUSE_MENU)
+            {
+                InGame();
+            }
+        }
+    }
 
     private void Awake()
     {
@@ -163,34 +157,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        PauseMenu();
-    }
-
     private void OnDestroy()
     {
-        if(instance == this)
+        if (instance == this)
         {
             instance = null;
         }
     }
 
+    // Start is called before the first frame update
+    void Start()
+    {
+        InGame();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            if (currentGameState == GameState.GS_PAUSE_MENU)
-            {
-                InGame();
-            }
-            else
-            {
-                PauseMenu();
-            }
-        }
+        ProcessInput();
 
 
         timer += Time.deltaTime;
