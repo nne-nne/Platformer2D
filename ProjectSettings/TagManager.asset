@@ -9,11 +9,12 @@ TagManager:
   - ExtraLive
   - Coin
   - FallLevel
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 
