@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [SerializeField] Canvas inGameCanvas;
+    [SerializeField] Canvas pauseMenuCanvas;
 
     public GameState currentGameState;
     public Image[] keysTab;
@@ -57,32 +59,17 @@ public class GameManager : MonoBehaviour
         enemiesTab[enemies].enabled = false;
     }
 
-    private void SetGameState(GameState newGameState)
-    {
-        Debug.Log("New game state: " + newGameState);
-        currentGameState = newGameState;
-
-        if(newGameState == GameState.GS_GAME)
-        {
-            inGameCanvas.enabled = true;
-        }
-        else
-        {
-            inGameCanvas.enabled = false;
-        }
-    }
-
-    private void InGame()
+    public void InGame()
     {
         SetGameState(GameState.GS_GAME);
-    } 
+    }
 
     public void GameOver()
     {
         SetGameState(GameState.GS_GAME_OVER);
     }
 
-    private void PauseMenu()
+    public void PauseMenu()
     {
         SetGameState(GameState.GS_PAUSE_MENU);
     }
@@ -92,6 +79,30 @@ public class GameManager : MonoBehaviour
         SetGameState(GameState.GS_LEVEL_COMPLETED);
     }
 
+
+    private void SetGameState(GameState newGameState)
+    {
+        Debug.Log("New game state: " + newGameState);
+        currentGameState = newGameState;
+
+        inGameCanvas.enabled = (currentGameState == GameState.GS_GAME);
+        pauseMenuCanvas.enabled = (currentGameState == GameState.GS_PAUSE_MENU);
+    }
+
+    private void ProcessInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (currentGameState == GameState.GS_GAME)
+            {
+                PauseMenu();
+            }
+            else if (currentGameState == GameState.GS_PAUSE_MENU)
+            {
+                InGame();
+            }
+        }
+    }
 
     private void Awake()
     {
@@ -111,34 +122,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        PauseMenu();
-    }
-
     private void OnDestroy()
     {
-        if(instance == this)
+        if (instance == this)
         {
             instance = null;
         }
     }
 
+    // Start is called before the first frame update
+    void Start()
+    {
+        InGame();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            if (currentGameState == GameState.GS_PAUSE_MENU)
-            {
-                InGame();
-            }
-            else
-            {
-                PauseMenu();
-            }
-        }
+        ProcessInput();
 
         Time.timeScale = currentGameState == GameState.GS_GAME ? 1f : 0;
 
