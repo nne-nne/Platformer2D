@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void SetGameState(GameState newGameState)
+    public void SetGameState(GameState newGameState)
     {
         Debug.Log("New game state: " + newGameState);
         currentGameState = newGameState;
