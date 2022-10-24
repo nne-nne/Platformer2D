@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 885866241556f7741a299948a65e2612
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Vtks Sonho
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 44d083d479c81504f9a070e81d5dfc5c, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

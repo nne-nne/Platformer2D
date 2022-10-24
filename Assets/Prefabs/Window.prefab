@@ -89,6 +89,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2298108137884303645, guid: 1a97e6566c6e78e4cb35b528e7befd09, type: 3}
+      propertyPath: m_Color.a
+      value: 0.043137256
+      objectReference: {fileID: 0}
+    - target: {fileID: 2298108137884303645, guid: 1a97e6566c6e78e4cb35b528e7befd09, type: 3}
+      propertyPath: m_Color.b
+      value: 0.5660378
+      objectReference: {fileID: 0}
+    - target: {fileID: 2298108137884303645, guid: 1a97e6566c6e78e4cb35b528e7befd09, type: 3}
+      propertyPath: m_Color.g
+      value: 0.562639
+      objectReference: {fileID: 0}
+    - target: {fileID: 2298108137884303645, guid: 1a97e6566c6e78e4cb35b528e7befd09, type: 3}
+      propertyPath: m_Color.r
+      value: 0.21573515
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a97e6566c6e78e4cb35b528e7befd09, type: 3}
 --- !u!4 &4148081129033515429 stripped
@@ -106,6 +122,22 @@ PrefabInstance:
     - target: {fileID: 7104726746392836956, guid: a492b6df7ad83564f87464ee6dc7e48b, type: 3}
       propertyPath: m_Name
       value: window_rect_frame (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645061308718372447, guid: a492b6df7ad83564f87464ee6dc7e48b, type: 3}
+      propertyPath: m_Color.a
+      value: 0.043137256
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645061308718372447, guid: a492b6df7ad83564f87464ee6dc7e48b, type: 3}
+      propertyPath: m_Color.b
+      value: 0.5660378
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645061308718372447, guid: a492b6df7ad83564f87464ee6dc7e48b, type: 3}
+      propertyPath: m_Color.g
+      value: 0.562639
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645061308718372447, guid: a492b6df7ad83564f87464ee6dc7e48b, type: 3}
+      propertyPath: m_Color.r
+      value: 0.21573515
       objectReference: {fileID: 0}
     - target: {fileID: 8783703583991278276, guid: a492b6df7ad83564f87464ee6dc7e48b, type: 3}
       propertyPath: m_RootOrder
@@ -169,6 +201,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: window_rect_frame (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7645061308718372447, guid: a492b6df7ad83564f87464ee6dc7e48b, type: 3}
+      propertyPath: m_Color.a
+      value: 0.043137256
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645061308718372447, guid: a492b6df7ad83564f87464ee6dc7e48b, type: 3}
+      propertyPath: m_Color.b
+      value: 0.5660378
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645061308718372447, guid: a492b6df7ad83564f87464ee6dc7e48b, type: 3}
+      propertyPath: m_Color.g
+      value: 0.562639
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645061308718372447, guid: a492b6df7ad83564f87464ee6dc7e48b, type: 3}
+      propertyPath: m_Color.r
+      value: 0.21573515
+      objectReference: {fileID: 0}
     - target: {fileID: 8783703583991278276, guid: a492b6df7ad83564f87464ee6dc7e48b, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -230,6 +278,22 @@ PrefabInstance:
     - target: {fileID: 7104726746392836956, guid: a492b6df7ad83564f87464ee6dc7e48b, type: 3}
       propertyPath: m_Name
       value: window_rect_frame
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645061308718372447, guid: a492b6df7ad83564f87464ee6dc7e48b, type: 3}
+      propertyPath: m_Color.a
+      value: 0.043137256
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645061308718372447, guid: a492b6df7ad83564f87464ee6dc7e48b, type: 3}
+      propertyPath: m_Color.b
+      value: 0.5660378
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645061308718372447, guid: a492b6df7ad83564f87464ee6dc7e48b, type: 3}
+      propertyPath: m_Color.g
+      value: 0.562639
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645061308718372447, guid: a492b6df7ad83564f87464ee6dc7e48b, type: 3}
+      propertyPath: m_Color.r
+      value: 0.21573515
       objectReference: {fileID: 0}
     - target: {fileID: 8783703583991278276, guid: a492b6df7ad83564f87464ee6dc7e48b, type: 3}
       propertyPath: m_RootOrder

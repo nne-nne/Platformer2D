@@ -223,8 +223,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 432ed97cf7ae4ff41ba54cf52a17c0ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxKeyNumber: 3
-  keyNumber: 0
 --- !u!114 &8544967592721420930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingPlatformTag: MovingPlatform
+  stickedMoveSpeedPart: 0.5
 --- !u!1001 &8101817455212090538
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -268,11 +267,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6060688676169147799, guid: 3ea0188f921cb9b41819c0be3b7e014f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.54
+      value: 1.72
       objectReference: {fileID: 0}
     - target: {fileID: 6060688676169147799, guid: 3ea0188f921cb9b41819c0be3b7e014f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.09
+      value: 0.68
       objectReference: {fileID: 0}
     - target: {fileID: 6060688676169147799, guid: 3ea0188f921cb9b41819c0be3b7e014f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -305,6 +304,14 @@ PrefabInstance:
     - target: {fileID: 6060688676169147799, guid: 3ea0188f921cb9b41819c0be3b7e014f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7776001290140355789, guid: 3ea0188f921cb9b41819c0be3b7e014f, type: 3}
+      propertyPath: amp
+      value: 19.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 7776001290140355789, guid: 3ea0188f921cb9b41819c0be3b7e014f, type: 3}
+      propertyPath: speed
+      value: 2.72
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ea0188f921cb9b41819c0be3b7e014f, type: 3}

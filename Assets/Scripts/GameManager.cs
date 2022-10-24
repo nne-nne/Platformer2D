@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [SerializeField] Canvas inGameCanvas;
+    [SerializeField] Canvas levelCompletedCanvas;
+    [SerializeField] Canvas gameOverCanvas;
     [SerializeField] Canvas pauseMenuCanvas;
 
     public GameState currentGameState;
@@ -25,20 +27,34 @@ public class GameManager : MonoBehaviour
     public Image[] livesTab;
     public Image[] enemiesTab;
     public TMP_Text timerText;
+    public TMP_Text gameOverScoreText;
+    public TMP_Text levelCompletedScoreText;
 
     private int keys = 0;
     private int lives = 3;
+    private int maxLives = 4;
     private int enemies = 2;
+    private int maxEnemies = 2;
+    private bool keysCompleted = false;
+
+    [SerializeField] int maxKeyNumber = 3;
+    
 
     private float timer = 0;
 
     public int Keys { get => keys; }
     public int Lives { get => lives; }
+    public int MaxKeyNumber { get => maxKeyNumber; }
+    public bool KeysCompleted { get => keysCompleted; }
 
     public void AddKey()
     {
         keysTab[keys].color = Color.yellow;
         keys++;
+        if(keys >= maxKeyNumber)
+        {
+            keysCompleted = true;
+        }
     }
 
     public void AddLive()
@@ -59,6 +75,20 @@ public class GameManager : MonoBehaviour
         enemiesTab[enemies].enabled = false;
     }
 
+    private double CountScore()
+    {
+        double timeBonus = 60.0 - timer;
+        if (timeBonus < 0) timeBonus = 0;
+        return timeBonus + (maxEnemies - enemies) * 20.0 + (maxLives -  lives )*10.0;
+    }
+
+    private void SetScoreText(TMP_Text textField)
+    {
+        double score = CountScore();
+        string scoreTextValue = $"Score: {score.ToString("F1")}";
+        textField.text = scoreTextValue;
+    }
+
     public void InGame()
     {
         SetGameState(GameState.GS_GAME);
@@ -66,6 +96,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        SetScoreText(gameOverScoreText);
         SetGameState(GameState.GS_GAME_OVER);
     }
 
@@ -76,17 +107,22 @@ public class GameManager : MonoBehaviour
 
     public void LevelCompleted()
     {
+        SetScoreText(levelCompletedScoreText);
         SetGameState(GameState.GS_LEVEL_COMPLETED);
     }
 
 
-    private void SetGameState(GameState newGameState)
+    public void SetGameState(GameState newGameState)
     {
         Debug.Log("New game state: " + newGameState);
         currentGameState = newGameState;
 
         inGameCanvas.enabled = (currentGameState == GameState.GS_GAME);
         pauseMenuCanvas.enabled = (currentGameState == GameState.GS_PAUSE_MENU);
+        gameOverCanvas.enabled = (currentGameState == GameState.GS_GAME_OVER);
+        levelCompletedCanvas.enabled = (currentGameState == GameState.GS_LEVEL_COMPLETED);
+
+        Time.timeScale = currentGameState == GameState.GS_GAME ? 1f : 0;
     }
 
     private void ProcessInput()
@@ -140,8 +176,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         ProcessInput();
-
-        Time.timeScale = currentGameState == GameState.GS_GAME ? 1f : 0;
 
 
         timer += Time.deltaTime;

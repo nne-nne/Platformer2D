@@ -8,15 +8,11 @@ using UnityEngine.SceneManagement;
 
 public class ItemCollector : MonoBehaviour
 {
-    [SerializeField] int maxKeyNumber = 3;
-    [SerializeField] int keyNumber = 0;
-
     private void OnTouchFinish()
     {
-        if (keyNumber >= maxKeyNumber)
+        if (GameManager.instance.KeysCompleted)
         {
-            Debug.Log($"finish");
-            SceneManager.LoadScene(1);
+            GameManager.instance.SetGameState(GameState.GS_LEVEL_COMPLETED);
         }
         else
         {
@@ -45,6 +41,10 @@ public class ItemCollector : MonoBehaviour
             Debug.Log($"You have an extra live now, good luck wasting both");
             GameManager.instance.AddLive();
             other.gameObject.SetActive(false);
+        }
+        else if (other.CompareTag("FallLevel"))
+        {
+            GameManager.instance.GameOver();
         }
     }
 }
