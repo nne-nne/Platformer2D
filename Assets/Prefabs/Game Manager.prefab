@@ -45,8 +45,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inGameCanvas: {fileID: 0}
+  levelCompletedCanvas: {fileID: 0}
+  gameOverCanvas: {fileID: 0}
+  pauseMenuCanvas: {fileID: 0}
   currentGameState: 0
-  keysTab: []
+  keysTab:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  livesTab:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  enemiesTab:
+  - {fileID: 0}
+  - {fileID: 0}
+  timerText: {fileID: 0}
+  gameOverScoreText: {fileID: 0}
+  levelCompletedScoreText: {fileID: 0}
+  maxKeyNumber: 3
 --- !u!114 &6307686941313486502
 MonoBehaviour:
   m_ObjectHideFlags: 0
