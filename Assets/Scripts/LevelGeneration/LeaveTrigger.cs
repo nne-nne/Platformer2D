@@ -7,7 +7,6 @@ public class LeaveTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject other = collision.gameObject;
-        Debug.Log(other);
         if (other.CompareTag(GameTags.PlayerTag))
         {
             LevelGenerator.Instance.AddPiece();

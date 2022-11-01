@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public GameState currentGameState;
     public Image[] keysTab;
     public Image[] livesTab;
+    [SerializeField] bool showEnemiesLeft = true;
     public Image[] enemiesTab;
     public TMP_Text timerText;
     public TMP_Text gameOverScoreText;
@@ -59,6 +60,12 @@ public class GameManager : MonoBehaviour
 
     public void AddLive()
     {
+        if(livesTab.Length == lives)
+        {
+            Debug.Log("Cannot exceed the maximum number of lives");
+            return;
+        }
+
         livesTab[lives].enabled = true;
         lives++;
     }
@@ -71,6 +78,9 @@ public class GameManager : MonoBehaviour
 
     public void KillEnemy()
     {
+        if (!showEnemiesLeft)
+            return;
+
         enemies--;
         enemiesTab[enemies].enabled = false;
     }
@@ -155,6 +165,15 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < livesTab.Length; i++)
         {
             livesTab[i].enabled = lives > i;
+        }
+
+        if (!showEnemiesLeft)
+        {
+            // Disable enemy count display
+            foreach(var enemyDisplay in enemiesTab)
+            {
+                enemyDisplay.enabled = false;
+            }
         }
     }
 
