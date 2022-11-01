@@ -54,4 +54,15 @@ public class EnemyController : MonoBehaviour
         theScale.x *= -1;
         transform.localScale = theScale;
     }
+
+
+    private void OnDrawGizmos()
+    {
+        // Draw movement bounds
+        Gizmos.color = Color.red;
+
+        Vector3 min = new Vector3(xMin, transform.position.y, transform.position.z);
+        Vector3 max = new Vector3(xMax, transform.position.y, transform.position.z);
+        Gizmos.DrawLine(min, max);
+    }
 }
