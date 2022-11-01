@@ -8,25 +8,22 @@ using UnityEngine;
 public class PlayerCollision : MonoBehaviour
 {
     public const float playerAboveThreshold = 0.3f;
-    [SerializeField] int startingHealth = 3;
-
-    private int currentHealth;
+    [SerializeField] bool resetPositionAfterCollision = true;
 
     private float killOffset;
     private Vector2 startPosition;
 
     private void LoseHealth()
     {
-        if (currentHealth <= 0)
-            return;
         GameManager.instance.LoseLive();
 
-        currentHealth -= 1;
-        StartCoroutine(ResetPositionAfterFrame());
-
-        if(currentHealth == 0)
+        if (resetPositionAfterCollision)
         {
-            Die();
+            StartCoroutine(ResetPositionAfterFrame());
+        }
+        else
+        {
+            // TODO: show being hit
         }
     }
 
@@ -37,15 +34,9 @@ public class PlayerCollision : MonoBehaviour
         transform.position = startPosition;
     }
 
-    private void Die()
-    {
-        Debug.Log("Player dead");
-    }
-
     private void Awake()
     {
         startPosition = transform.position;
-        currentHealth = startingHealth;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
