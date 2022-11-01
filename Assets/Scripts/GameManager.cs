@@ -74,6 +74,9 @@ public class GameManager : MonoBehaviour
     {
         lives--;
         livesTab[lives].enabled = false;
+
+        if (lives == 0)
+            GameOver();
     }
 
     public void KillEnemy()
