@@ -3684,6 +3684,7 @@ MonoBehaviour:
   yMargin: 1
   xSmooth: 8
   ySmooth: 8
+  setBounds: 1
   maxXAndY: {x: 100, y: 100}
   minXAndY: {x: -100, y: -100}
 --- !u!114 &893763049 stripped
@@ -7998,10 +7999,6 @@ PrefabInstance:
     - target: {fileID: 2342529667741364140, guid: 2795318469c192a448a8321c740cf05c, type: 3}
       propertyPath: m_Name
       value: gem_1 (11)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2342529667741364140, guid: 2795318469c192a448a8321c740cf05c, type: 3}
-      propertyPath: m_TagString
-      value: Coin
       objectReference: {fileID: 0}
     - target: {fileID: 8659796245862684059, guid: 2795318469c192a448a8321c740cf05c, type: 3}
       propertyPath: m_RootOrder
