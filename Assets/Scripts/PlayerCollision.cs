@@ -9,6 +9,7 @@ public class PlayerCollision : MonoBehaviour
 {
     public const float playerAboveThreshold = 0.3f;
     [SerializeField] int startingHealth = 3;
+    [SerializeField] bool resetPositionAfterCollision = true;
 
     private int currentHealth;
 
@@ -22,7 +23,15 @@ public class PlayerCollision : MonoBehaviour
         GameManager.instance.LoseLive();
 
         currentHealth -= 1;
-        StartCoroutine(ResetPositionAfterFrame());
+
+        if (resetPositionAfterCollision)
+        {
+            StartCoroutine(ResetPositionAfterFrame());
+        }
+        else
+        {
+            // TODO: show being hit
+        }
 
         if(currentHealth == 0)
         {
