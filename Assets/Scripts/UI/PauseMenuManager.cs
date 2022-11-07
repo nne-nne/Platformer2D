@@ -19,8 +19,6 @@ public class PauseMenuManager : MonoBehaviour
 
     public void OnExitButtonClicked()
     {
-        throw new NotImplementedException();
-
         string mainMenuSceneName = "Main Menu";
         SceneManager.LoadScene(mainMenuSceneName);
     }
