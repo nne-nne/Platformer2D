@@ -11,7 +11,8 @@ public enum GameState
     GS_PAUSE_MENU,
     GS_GAME,
     GS_GAME_OVER,
-    GS_LEVEL_COMPLETED
+    GS_LEVEL_COMPLETED,
+    GS_OPTIONS
 }
 
 public class GameManager : MonoBehaviour
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Canvas levelCompletedCanvas;
     [SerializeField] Canvas gameOverCanvas;
     [SerializeField] Canvas pauseMenuCanvas;
+    [SerializeField] Canvas optionsCanvas;
 
     public GameState currentGameState;
     public Image[] keysTab;
@@ -128,6 +130,12 @@ public class GameManager : MonoBehaviour
         SetGameState(GameState.GS_LEVEL_COMPLETED);
     }
 
+    public void Options()
+    {
+        SetGameState(GameState.GS_OPTIONS);
+        Time.timeScale = 0.0f;
+    }
+
 
     public void SetGameState(GameState newGameState)
     {
@@ -138,6 +146,7 @@ public class GameManager : MonoBehaviour
         pauseMenuCanvas.enabled = (currentGameState == GameState.GS_PAUSE_MENU);
         gameOverCanvas.enabled = (currentGameState == GameState.GS_GAME_OVER);
         levelCompletedCanvas.enabled = (currentGameState == GameState.GS_LEVEL_COMPLETED);
+        optionsCanvas.enabled = (currentGameState == GameState.GS_OPTIONS);
 
         if (newGameState == GameState.GS_LEVEL_COMPLETED || currentGameState == GameState.GS_GAME_OVER)
         {
