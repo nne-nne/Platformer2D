@@ -39,11 +39,23 @@ public class PlayerPlatformSticker : MonoBehaviour
         if (isLocked)
             return;
 
-        PlayerControllerLevel1 playerController = GetComponent<PlayerControllerLevel1>();
-        originalMovespeed = playerController.MoveSpeed;
-        playerController.MoveSpeed = originalMovespeed * stickedMoveSpeedPart;
+        PlayerControllerLevel1 playerController1 = GetComponent<PlayerControllerLevel1>();
+        PlayerControllerLevel2 playerController2 = GetComponent<PlayerControllerLevel2>();
+        if(playerController1!= null)
+        {
+            originalMovespeed = playerController1.MoveSpeed;
+            playerController1.MoveSpeed = originalMovespeed * stickedMoveSpeedPart;
 
-        playerController.ImpulseMovingEnabled = false;
+            playerController1.ImpulseMovingEnabled = false;
+        }
+        else if(playerController2 != null)
+        {
+            originalMovespeed = playerController2.MoveSpeed;
+            playerController2.MoveSpeed = originalMovespeed * stickedMoveSpeedPart;
+
+            playerController2.ImpulseMovingEnabled = false;
+        }
+        
 
         isLocked = true;
     }
@@ -56,10 +68,20 @@ public class PlayerPlatformSticker : MonoBehaviour
         if (!isLocked)
             return;
 
-        PlayerControllerLevel1 playerController = GetComponent<PlayerControllerLevel1>();
-        playerController.MoveSpeed = originalMovespeed;
 
-        playerController.ImpulseMovingEnabled = true;
+        PlayerControllerLevel1 playerController1 = GetComponent<PlayerControllerLevel1>();
+        PlayerControllerLevel2 playerController2 = GetComponent<PlayerControllerLevel2>();
+
+        if (playerController1 != null)
+        {
+            playerController1.MoveSpeed = originalMovespeed;
+        } else if (playerController2 != null)
+        {
+            playerController2.ImpulseMovingEnabled = true;
+        }
+        
+
+       
 
         isLocked = false;
     }
@@ -74,16 +96,47 @@ public class PlayerPlatformSticker : MonoBehaviour
 
     private void OnEnable()
     {
-        GetComponent<PlayerControllerLevel1>().onJumpInput += OnJumpInput;
+        PlayerControllerLevel1 playerController1 = GetComponent<PlayerControllerLevel1>();
+        PlayerControllerLevel2 playerController2 = GetComponent<PlayerControllerLevel2>();
+
+        if (playerController1 != null)
+        {
+            playerController1.onJumpInput += OnJumpInput;
+        }
+        else if (playerController2 != null)
+        {
+            playerController2.onJumpInput += OnJumpInput;
+        }
     }
 
     private void OnDisable()
     {
-        GetComponent<PlayerControllerLevel1>().onJumpInput -= OnJumpInput;
+        PlayerControllerLevel1 playerController1 = GetComponent<PlayerControllerLevel1>();
+        PlayerControllerLevel2 playerController2 = GetComponent<PlayerControllerLevel2>();
+
+        if (playerController1 != null)
+        {
+            playerController1.onJumpInput -= OnJumpInput;
+        }
+        else if (playerController2 != null)
+        {
+            playerController2.onJumpInput -= OnJumpInput;
+        }
     }
 
     private void Start()
     {
-        originalMovespeed = GetComponent<PlayerControllerLevel1>().MoveSpeed;
+        PlayerControllerLevel1 playerController1 = GetComponent<PlayerControllerLevel1>();
+        PlayerControllerLevel2 playerController2 = GetComponent<PlayerControllerLevel2>();
+
+        if (playerController1 != null)
+        {
+            originalMovespeed = playerController1.MoveSpeed;
+        }
+        else if (playerController2 != null)
+        {
+            originalMovespeed = playerController2.MoveSpeed;
+        }
+        
     }
 }
