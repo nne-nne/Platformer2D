@@ -15,6 +15,25 @@ public class PlayerControllerLevel1 : MonoBehaviour
 
     public event Action onJumpInput;
 
+    private bool leftClicked;
+    private bool rightClicked;
+    private bool upClicked;
+
+    public void SetLeftClicked(bool clicked)
+    {
+        leftClicked = clicked;
+    }
+
+    public void SetRightClicked(bool clicked)
+    {
+        rightClicked = clicked;
+    }
+
+    public void SetUpClicked(bool clicked)
+    {
+        upClicked = clicked;
+    }
+
     public float MoveSpeed
     {
         get => moveSpeed;
@@ -89,24 +108,24 @@ public class PlayerControllerLevel1 : MonoBehaviour
             return;
 
         float hor = Input.GetAxis("Horizontal");
-        if (hor != 0)
+        if (hor != 0 || rightClicked || leftClicked)
         {
             animator.SetBool("isWalking", true);
             if (hor > 0 && !isFacingRight || hor < 0 && isFacingRight)
             {
                 Flip();
             }
-            if(hor > 0)
+            if(hor > 0 || rightClicked)
             {
                 MoveRight();
             }
-            if (hor < 0)
+            if (hor < 0 || leftClicked)
             {
                 MoveLeft();
             }
         }
         else animator.SetBool("isWalking", false);
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)||upClicked)
         {
             onJumpInput?.Invoke();
             Jump();
