@@ -111,7 +111,7 @@ public class PlayerControllerLevel1 : MonoBehaviour
         if (hor != 0 || rightClicked || leftClicked)
         {
             animator.SetBool("isWalking", true);
-            if (hor > 0 && !isFacingRight || hor < 0 && isFacingRight)
+            if ((hor > 0 || rightClicked) && !isFacingRight || (hor < 0 || leftClicked) && isFacingRight)
             {
                 Flip();
             }
