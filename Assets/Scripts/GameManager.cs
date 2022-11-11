@@ -4,13 +4,15 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
     GS_PAUSE_MENU,
     GS_GAME,
     GS_GAME_OVER,
-    GS_LEVEL_COMPLETED
+    GS_LEVEL_COMPLETED,
+    GS_OPTIONS
 }
 
 public class GameManager : MonoBehaviour
@@ -21,6 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Canvas levelCompletedCanvas;
     [SerializeField] Canvas gameOverCanvas;
     [SerializeField] Canvas pauseMenuCanvas;
+    [SerializeField] Canvas optionsCanvas;
 
     public GameState currentGameState;
     public Image[] keysTab;
@@ -30,6 +33,8 @@ public class GameManager : MonoBehaviour
     public TMP_Text timerText;
     public TMP_Text gameOverScoreText;
     public TMP_Text levelCompletedScoreText;
+    public TMP_Text levelCompletedHighScoreText;
+    public TMP_Text gameOverHighScoreText;
 
     private int keys = 0;
     private int lives = 3;
@@ -37,6 +42,7 @@ public class GameManager : MonoBehaviour
     private int enemies = 2;
     private int maxEnemies = 2;
     private bool keysCompleted = false;
+    private int maxSecsToHighScore = 80;
 
     [SerializeField] int maxKeyNumber = 3;
     
@@ -88,17 +94,17 @@ public class GameManager : MonoBehaviour
         enemiesTab[enemies].enabled = false;
     }
 
-    private double CountScore()
+    private int CountScore()
     {
-        double timeBonus = 60.0 - timer;
+        double timeBonus = maxSecsToHighScore - timer;
         if (timeBonus < 0) timeBonus = 0;
-        return timeBonus + (maxEnemies - enemies) * 20.0 + (maxLives -  lives )*10.0;
+        return (int)(timeBonus + (maxEnemies - enemies) * 20.0 + (maxLives -  lives )*10.0);
     }
 
     private void SetScoreText(TMP_Text textField)
     {
-        double score = CountScore();
-        string scoreTextValue = $"Score: {score.ToString("F1")}";
+        int score = CountScore();
+        string scoreTextValue = $"Score: {score}";
         textField.text = scoreTextValue;
     }
 
@@ -124,6 +130,12 @@ public class GameManager : MonoBehaviour
         SetGameState(GameState.GS_LEVEL_COMPLETED);
     }
 
+    public void Options()
+    {
+        SetGameState(GameState.GS_OPTIONS);
+        Time.timeScale = 0.0f;
+    }
+
 
     public void SetGameState(GameState newGameState)
     {
@@ -134,6 +146,37 @@ public class GameManager : MonoBehaviour
         pauseMenuCanvas.enabled = (currentGameState == GameState.GS_PAUSE_MENU);
         gameOverCanvas.enabled = (currentGameState == GameState.GS_GAME_OVER);
         levelCompletedCanvas.enabled = (currentGameState == GameState.GS_LEVEL_COMPLETED);
+        optionsCanvas.enabled = (currentGameState == GameState.GS_OPTIONS);
+
+        if (newGameState == GameState.GS_LEVEL_COMPLETED || currentGameState == GameState.GS_GAME_OVER)
+        {
+            Scene currentScene = SceneManager.GetActiveScene();
+            if (currentScene.name == "Level1")
+            {
+                int score = CountScore();
+                if (score > PlayerPrefs.GetInt("HighscoreLevel1"))
+                {
+                    PlayerPrefs.SetInt("HighscoreLevel1", score);
+                }
+                levelCompletedHighScoreText.text = $"High Score: {PlayerPrefs.GetInt("HighscoreLevel1")}";
+                gameOverHighScoreText.text = $"High Score: {PlayerPrefs.GetInt("HighscoreLevel1")}";
+                levelCompletedScoreText.text = $"Score: {score}";
+                gameOverScoreText.text = $"Score: {score}";
+            }
+            if (currentScene.name == "Level2")
+            {
+                int score = CountScore();
+                if (score > PlayerPrefs.GetInt("HighscoreLevel2"))
+                {
+                    PlayerPrefs.SetInt("HighscoreLevel2", score);
+                }
+                levelCompletedHighScoreText.text = $"High Score: {PlayerPrefs.GetInt("HighscoreLevel2")}";
+                gameOverHighScoreText.text = $"High Score: {PlayerPrefs.GetInt("HighscoreLevel2")}";
+                levelCompletedScoreText.text = $"Score: {score}";
+                gameOverScoreText.text = $"Score: {score}";
+            }
+        }
+        
 
         Time.timeScale = currentGameState == GameState.GS_GAME ? 1f : 0;
     }
@@ -158,6 +201,11 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+        }
+
+        if (!PlayerPrefs.HasKey("HighscoreLevel1"))
+        {
+            PlayerPrefs.SetInt("HighscoreLevel1", 0);
         }
 
         foreach (Image keyImg in keysTab)
