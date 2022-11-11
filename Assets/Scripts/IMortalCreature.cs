@@ -7,4 +7,5 @@ using System.Threading.Tasks;
 interface IMortalCreature
 {
     bool IsAlive();
+    void Die();
 }

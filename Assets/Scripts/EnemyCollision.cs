@@ -18,7 +18,7 @@ public class EnemyCollision : MonoBehaviour, IMortalCreature
         return !isDead;
     }
 
-    private void Die()
+    public void Die()
     {
         isDead = true;
         GetComponent<EnemyController>().enabled = false;

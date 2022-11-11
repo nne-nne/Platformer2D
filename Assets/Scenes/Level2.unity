@@ -4795,6 +4795,14 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1577212219978205865, guid: 0eecc8b7a74f04a4e8489bcb813110d0, type: 3}
+      propertyPath: pushbackVector.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1577212219978205865, guid: 0eecc8b7a74f04a4e8489bcb813110d0, type: 3}
+      propertyPath: shouldKamikazeKill
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1577212219978205865, guid: 0eecc8b7a74f04a4e8489bcb813110d0, type: 3}
       propertyPath: resetPositionAfterCollision
       value: 0
       objectReference: {fileID: 0}
