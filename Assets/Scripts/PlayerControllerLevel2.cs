@@ -84,20 +84,14 @@ public class PlayerControllerLevel2 : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.instance.currentGameState != GameState.GS_GAME)
-        {
-            rigidBody.velocity = rigidBody.velocity / 2;
-            return;
-        }
-        animator.SetBool("isWalking", true);
 
-        if(rigidBody.velocity.x < moveSpeed)
+        if (rigidBody.velocity.x < moveSpeed)
         {
             rigidBody.velocity = new Vector2(moveSpeed, rigidBody.velocity.y);
         }
 
         float hor = Input.GetAxis("Horizontal");
-  
+
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             onJumpInput?.Invoke();

@@ -111,29 +111,45 @@ public class GameManager : MonoBehaviour
     public void InGame()
     {
         SetGameState(GameState.GS_GAME);
+        
     }
 
     public void GameOver()
     {
         SetScoreText(gameOverScoreText);
         SetGameState(GameState.GS_GAME_OVER);
+       
     }
 
     public void PauseMenu()
     {
         SetGameState(GameState.GS_PAUSE_MENU);
+        
     }
 
     public void LevelCompleted()
     {
         SetScoreText(levelCompletedScoreText);
         SetGameState(GameState.GS_LEVEL_COMPLETED);
+        
     }
 
     public void Options()
     {
         SetGameState(GameState.GS_OPTIONS);
-        Time.timeScale = 0.0f;
+    }
+
+    private IEnumerator ChangeTimePace(float target, int frames)
+    {
+        float originalTimeScale = Time.timeScale;
+        int frame = 0;
+        while(frame < frames)
+        {
+            Time.timeScale = Mathf.Lerp(originalTimeScale, target, frame/frames);
+            frame++;
+            yield return null;
+        }
+        Time.timeScale = target;
     }
 
 
@@ -177,8 +193,9 @@ public class GameManager : MonoBehaviour
             }
         }
         
-
-        Time.timeScale = currentGameState == GameState.GS_GAME ? 1f : 0;
+        float targetTimeScale = currentGameState == GameState.GS_GAME ? 1f : 0;
+        StopAllCoroutines();
+        StartCoroutine(ChangeTimePace(targetTimeScale, 100));
     }
 
     private void ProcessInput()
