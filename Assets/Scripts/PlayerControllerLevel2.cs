@@ -95,6 +95,7 @@ public class PlayerControllerLevel2 : MonoBehaviour
 
     public void Activate()
     {
+        StopAllCoroutines();
         animator.SetBool("isWalking", true);
         rigidBody.velocity = savedVelocity;
         isWalking = true;

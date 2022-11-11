@@ -5378,7 +5378,7 @@ PrefabInstance:
       objectReference: {fileID: 148491425}
     - target: {fileID: 2678736034151651727, guid: e91ca73c75d7f9847acac6e0d82343a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PauseMenu
+      value: InGame
       objectReference: {fileID: 0}
     - target: {fileID: 3311324324062564204, guid: e91ca73c75d7f9847acac6e0d82343a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -5431,6 +5431,34 @@ PrefabInstance:
     - target: {fileID: 3908671447879418572, guid: e91ca73c75d7f9847acac6e0d82343a9, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3962646598371429371, guid: e91ca73c75d7f9847acac6e0d82343a9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3962646598371429371, guid: e91ca73c75d7f9847acac6e0d82343a9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3962646598371429371, guid: e91ca73c75d7f9847acac6e0d82343a9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 148491425}
+    - target: {fileID: 3962646598371429371, guid: e91ca73c75d7f9847acac6e0d82343a9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3962646598371429371, guid: e91ca73c75d7f9847acac6e0d82343a9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 3962646598371429371, guid: e91ca73c75d7f9847acac6e0d82343a9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3962646598371429371, guid: e91ca73c75d7f9847acac6e0d82343a9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4077502601721409793, guid: e91ca73c75d7f9847acac6e0d82343a9, type: 3}
       propertyPath: m_ReferenceResolution.x
