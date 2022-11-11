@@ -44,8 +44,6 @@ public class GameManager : MonoBehaviour
     private bool keysCompleted = false;
     private int maxSecsToHighScore = 80;
 
-    private PlayerControllerLevel2 playerLv2;
-
     [SerializeField] int maxKeyNumber = 3;
     
 
@@ -113,49 +111,45 @@ public class GameManager : MonoBehaviour
     public void InGame()
     {
         SetGameState(GameState.GS_GAME);
-        if (playerLv2 != null)
-        {
-            playerLv2.Activate();
-        }
+        
     }
 
     public void GameOver()
     {
         SetScoreText(gameOverScoreText);
         SetGameState(GameState.GS_GAME_OVER);
-        if (playerLv2 != null)
-        {
-            playerLv2.Deactivate();
-        }
+       
     }
 
     public void PauseMenu()
     {
         SetGameState(GameState.GS_PAUSE_MENU);
-        if (playerLv2 != null)
-        {
-            playerLv2.Deactivate();
-        }
+        
     }
 
     public void LevelCompleted()
     {
         SetScoreText(levelCompletedScoreText);
         SetGameState(GameState.GS_LEVEL_COMPLETED);
-        if (playerLv2 != null)
-        {
-            playerLv2.Deactivate();
-        }
+        
     }
 
     public void Options()
     {
         SetGameState(GameState.GS_OPTIONS);
-        Time.timeScale = 0.0f;
-        if (playerLv2 != null)
+    }
+
+    private IEnumerator ChangeTimePace(float target, int frames)
+    {
+        float originalTimeScale = Time.timeScale;
+        int frame = 0;
+        while(frame < frames)
         {
-            playerLv2.Deactivate();
+            Time.timeScale = Mathf.Lerp(originalTimeScale, target, frame/frames);
+            frame++;
+            yield return null;
         }
+        Time.timeScale = target;
     }
 
 
@@ -199,8 +193,9 @@ public class GameManager : MonoBehaviour
             }
         }
         
-
-        Time.timeScale = currentGameState == GameState.GS_GAME ? 1f : 0;
+        float targetTimeScale = currentGameState == GameState.GS_GAME ? 1f : 0;
+        StopAllCoroutines();
+        StartCoroutine(ChangeTimePace(targetTimeScale, 100));
     }
 
     private void ProcessInput()
@@ -248,8 +243,6 @@ public class GameManager : MonoBehaviour
                 enemyDisplay.enabled = false;
             }
         }
-
-        playerLv2 = FindObjectOfType<PlayerControllerLevel2>();
     }
 
     private void OnDestroy()

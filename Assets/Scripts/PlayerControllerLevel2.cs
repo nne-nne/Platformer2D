@@ -21,12 +21,10 @@ public class PlayerControllerLevel2 : MonoBehaviour
     }
 
     public bool ImpulseMovingEnabled { get; set; } = true;
-    private bool isWalking = true;
 
     private Rigidbody2D rigidBody;
     private bool isFacingRight = true;
     private Animator animator;
-    private Vector3 savedVelocity = Vector3.zero;
     public void Jump()
     {
         if (!IsGrounded())
@@ -74,7 +72,6 @@ public class PlayerControllerLevel2 : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
-        isWalking = true;
     }
 
     void Flip()
@@ -85,50 +82,22 @@ public class PlayerControllerLevel2 : MonoBehaviour
         transform.localScale = theScale;
     }
 
-    public void Deactivate()
-    {
-        savedVelocity = rigidBody.velocity;
-        animator.SetBool("isWalking", false);
-        isWalking = false;
-        StartCoroutine(SlowDown());
-    }
-
-    public void Activate()
-    {
-        StopAllCoroutines();
-        animator.SetBool("isWalking", true);
-        rigidBody.velocity = savedVelocity;
-        isWalking = true;
-    }
-
-    private IEnumerator SlowDown()
-    {
-        Vector3 vel = savedVelocity;
-        while (vel.sqrMagnitude > Mathf.Epsilon)
-        {
-            vel *= 0.999f;
-            yield return null;
-        }
-    }
-
     void Update()
     {
-        if (isWalking)
+
+        if (rigidBody.velocity.x < moveSpeed)
         {
-            if (rigidBody.velocity.x < moveSpeed)
-            {
-                rigidBody.velocity = new Vector2(moveSpeed, rigidBody.velocity.y);
-            }
-
-            float hor = Input.GetAxis("Horizontal");
-
-            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
-            {
-                onJumpInput?.Invoke();
-                Jump();
-            }
-            animator.SetBool("isGrounded", IsGrounded());
+            rigidBody.velocity = new Vector2(moveSpeed, rigidBody.velocity.y);
         }
+
+        float hor = Input.GetAxis("Horizontal");
+
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+        {
+            onJumpInput?.Invoke();
+            Jump();
+        }
+        animator.SetBool("isGrounded", IsGrounded());
     }
 
     private void OnDrawGizmosSelected()
