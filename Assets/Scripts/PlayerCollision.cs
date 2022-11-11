@@ -9,6 +9,8 @@ public class PlayerCollision : MonoBehaviour
 {
     public const float playerAboveThreshold = 0.3f;
     [SerializeField] bool resetPositionAfterCollision = true;
+    [SerializeField] Vector2 pushbackVector = new Vector2(-1, 0);
+    [SerializeField] bool shouldKamikazeKill = false;
 
     private float killOffset;
     private Vector2 startPosition;
@@ -23,7 +25,7 @@ public class PlayerCollision : MonoBehaviour
         }
         else
         {
-            // TODO: show being hit
+            StartCoroutine(PushBackAfterFrame());
         }
     }
 
@@ -32,6 +34,13 @@ public class PlayerCollision : MonoBehaviour
         yield return null;
 
         transform.position = startPosition;
+    }
+
+    private IEnumerator PushBackAfterFrame()
+    {
+        yield return null;
+
+        transform.position += new Vector3(pushbackVector.x, pushbackVector.y, 0);
     }
 
     private void Awake()
@@ -56,6 +65,10 @@ public class PlayerCollision : MonoBehaviour
         if(!isPlayerAbove)
         {
             LoseHealth();
+            if (shouldKamikazeKill)
+            {
+                mortal.Die(); // kill also the enemy
+            }
         }
     }
 }

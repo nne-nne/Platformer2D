@@ -990,6 +990,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3160404435358770094}
     m_Modifications:
+    - target: {fileID: 829850575293953034, guid: 959918a43d62e824686daea3ea5b4624, type: 3}
+      propertyPath: shouldDieOnEveryCollision
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6084951852646480106, guid: 959918a43d62e824686daea3ea5b4624, type: 3}
       propertyPath: m_RootOrder
       value: 9
