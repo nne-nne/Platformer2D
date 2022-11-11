@@ -9,7 +9,10 @@ public class LeaveTrigger : MonoBehaviour
         GameObject other = collision.gameObject;
         if (other.CompareTag(GameTags.PlayerTag))
         {
-            LevelGenerator.Instance.AddPiece();
+            if (!LevelGenerator.Instance.ShouldFinish)
+            {
+                LevelGenerator.Instance.AddPiece();
+            }
             LevelGenerator.Instance.RemoveOldestPiece();
         }
     }

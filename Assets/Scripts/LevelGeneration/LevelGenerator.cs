@@ -8,10 +8,15 @@ public class LevelGenerator : MonoBehaviour
 
     [SerializeField] Transform startPoint;
     [SerializeField] List<LevelPieceBasic> levelPrefabs = new List<LevelPieceBasic>();
-    [SerializeField] LevelPieceBasic startPlatformPiece;
+    [SerializeField] LevelPieceBasic startPlatformPrefab;
+    [SerializeField] LevelPieceBasic endPlatformPrefab;
+    [Tooltip("Time in seconds before generating the exit platform")]
+    [SerializeField] int maxGameTime = 30;
+
+    public bool ShouldFinish { get; private set; }
+    public int MaxGameTime => maxGameTime;
 
     private List<LevelPieceBasic> piecesOnScene = new List<LevelPieceBasic>();
-
 
 
     /// <summary>
@@ -35,6 +40,12 @@ public class LevelGenerator : MonoBehaviour
 
         piecesOnScene.Remove(oldestPiece);
         Destroy(oldestPiece.gameObject);
+    }
+
+    public void GenerateExit()
+    {
+        ShouldFinish = true;
+        AddPiece(endPlatformPrefab);
     }
 
     /// <summary>
@@ -76,7 +87,9 @@ public class LevelGenerator : MonoBehaviour
 
     private void Start()
     {
-        AddPiece(startPlatformPiece);
+        ShouldFinish = false;
+
+        AddPiece(startPlatformPrefab);
         AddPiece();
         AddPiece();
     }
