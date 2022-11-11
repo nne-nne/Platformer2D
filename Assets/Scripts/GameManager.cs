@@ -259,14 +259,23 @@ public class GameManager : MonoBehaviour
         InGame();
     }
 
+    private bool ShouldGenerateExitPlatform
+        => LevelGenerator.Instance != null &&
+        LevelGenerator.Instance.ShouldFinish == false &&
+        timer >= LevelGenerator.Instance.MaxGameTime;
+
     // Update is called once per frame
     void Update()
     {
         ProcessInput();
 
-
         timer += Time.deltaTime;
         int timerSeconds = Mathf.FloorToInt(timer);
         timerText.text = string.Format("{0:00}:{1:00}", Mathf.FloorToInt(timerSeconds/60), timerSeconds%60);
+
+        if (ShouldGenerateExitPlatform)
+        {
+            LevelGenerator.Instance.GenerateExit();
+        }
     }
 }

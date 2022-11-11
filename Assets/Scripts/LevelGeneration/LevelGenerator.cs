@@ -8,11 +8,20 @@ public class LevelGenerator : MonoBehaviour
 
     [SerializeField] Transform startPoint;
     [SerializeField] List<LevelPieceBasic> levelPrefabs = new List<LevelPieceBasic>();
+    [SerializeField] LevelPieceBasic startPlatformPrefab;
+    [SerializeField] LevelPieceBasic endPlatformPrefab;
+    [Tooltip("Time in seconds before generating the exit platform")]
+    [SerializeField] int maxGameTime = 30;
+
+    public bool ShouldFinish { get; private set; }
+    public int MaxGameTime => maxGameTime;
 
     private List<LevelPieceBasic> piecesOnScene = new List<LevelPieceBasic>();
 
 
-
+    /// <summary>
+    /// Dodaje losowy segment
+    /// </summary>
     public void AddPiece()
     {
         if (levelPrefabs.Count == 0)
@@ -22,12 +31,7 @@ public class LevelGenerator : MonoBehaviour
         }
 
         int randomIndex = Random.Range(0, levelPrefabs.Count); // max exclusive
-        LevelPieceBasic piece = Instantiate(levelPrefabs[randomIndex]);
-
-        piece.transform.SetParent(transform, false);
-        PlacePieceOnEnd(piece);
-
-        piecesOnScene.Add(piece);
+        AddPiece(levelPrefabs[randomIndex]);
     }
 
     public void RemoveOldestPiece()
@@ -36,6 +40,25 @@ public class LevelGenerator : MonoBehaviour
 
         piecesOnScene.Remove(oldestPiece);
         Destroy(oldestPiece.gameObject);
+    }
+
+    public void GenerateExit()
+    {
+        ShouldFinish = true;
+        AddPiece(endPlatformPrefab);
+    }
+
+    /// <summary>
+    /// Dodaje zadany segment
+    /// </summary>
+    /// <param name="piecePrefab">Prefab</param>
+    private void AddPiece(LevelPieceBasic piecePrefab)
+    {
+        LevelPieceBasic piece = Instantiate(piecePrefab);
+        piece.transform.SetParent(transform, false);
+        PlacePieceOnEnd(piece);
+
+        piecesOnScene.Add(piece);
     }
 
     private void PlacePieceOnEnd(LevelPieceBasic newPiece)
@@ -64,6 +87,9 @@ public class LevelGenerator : MonoBehaviour
 
     private void Start()
     {
+        ShouldFinish = false;
+
+        AddPiece(startPlatformPrefab);
         AddPiece();
         AddPiece();
     }
