@@ -84,20 +84,22 @@ public class PlayerControllerLevel2 : MonoBehaviour
 
     void Update()
     {
-
-        if (rigidBody.velocity.x < moveSpeed)
+        if(GameManager.instance.currentGameState == GameState.GS_GAME)
         {
-            rigidBody.velocity = new Vector2(moveSpeed, rigidBody.velocity.y);
-        }
+            if (rigidBody.velocity.x < moveSpeed)
+            {
+                rigidBody.velocity = new Vector2(moveSpeed, rigidBody.velocity.y);
+            }
 
-        float hor = Input.GetAxis("Horizontal");
+            float hor = Input.GetAxis("Horizontal");
 
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
-        {
-            onJumpInput?.Invoke();
-            Jump();
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+            {
+                onJumpInput?.Invoke();
+                Jump();
+            }
+            animator.SetBool("isGrounded", IsGrounded());
         }
-        animator.SetBool("isGrounded", IsGrounded());
     }
 
     private void OnDrawGizmosSelected()
