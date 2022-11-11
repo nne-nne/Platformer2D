@@ -195,7 +195,7 @@ public class GameManager : MonoBehaviour
         
         float targetTimeScale = currentGameState == GameState.GS_GAME ? 1f : 0;
         StopAllCoroutines();
-        StartCoroutine(ChangeTimePace(targetTimeScale, 100));
+        StartCoroutine(ChangeTimePace(targetTimeScale, 50));
     }
 
     private void ProcessInput()
