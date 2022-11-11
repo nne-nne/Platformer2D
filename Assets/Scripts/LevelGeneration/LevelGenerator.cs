@@ -8,11 +8,15 @@ public class LevelGenerator : MonoBehaviour
 
     [SerializeField] Transform startPoint;
     [SerializeField] List<LevelPieceBasic> levelPrefabs = new List<LevelPieceBasic>();
+    [SerializeField] LevelPieceBasic startPlatformPiece;
 
     private List<LevelPieceBasic> piecesOnScene = new List<LevelPieceBasic>();
 
 
 
+    /// <summary>
+    /// Dodaje losowy segment
+    /// </summary>
     public void AddPiece()
     {
         if (levelPrefabs.Count == 0)
@@ -22,12 +26,7 @@ public class LevelGenerator : MonoBehaviour
         }
 
         int randomIndex = Random.Range(0, levelPrefabs.Count); // max exclusive
-        LevelPieceBasic piece = Instantiate(levelPrefabs[randomIndex]);
-
-        piece.transform.SetParent(transform, false);
-        PlacePieceOnEnd(piece);
-
-        piecesOnScene.Add(piece);
+        AddPiece(levelPrefabs[randomIndex]);
     }
 
     public void RemoveOldestPiece()
@@ -36,6 +35,19 @@ public class LevelGenerator : MonoBehaviour
 
         piecesOnScene.Remove(oldestPiece);
         Destroy(oldestPiece.gameObject);
+    }
+
+    /// <summary>
+    /// Dodaje zadany segment
+    /// </summary>
+    /// <param name="piecePrefab">Prefab</param>
+    private void AddPiece(LevelPieceBasic piecePrefab)
+    {
+        LevelPieceBasic piece = Instantiate(piecePrefab);
+        piece.transform.SetParent(transform, false);
+        PlacePieceOnEnd(piece);
+
+        piecesOnScene.Add(piece);
     }
 
     private void PlacePieceOnEnd(LevelPieceBasic newPiece)
@@ -64,6 +76,7 @@ public class LevelGenerator : MonoBehaviour
 
     private void Start()
     {
+        AddPiece(startPlatformPiece);
         AddPiece();
         AddPiece();
     }

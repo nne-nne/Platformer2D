@@ -46,3 +46,4 @@ MonoBehaviour:
   startPoint: {fileID: 0}
   levelPrefabs:
   - {fileID: 4565419769204332296, guid: ad29c2c0f369ca24788a01865af25e5f, type: 3}
+  startPlatformPiece: {fileID: 4565419769204332296, guid: 5e2b04a93b6615b40957f55f3311f661, type: 3}
